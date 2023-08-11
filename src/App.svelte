@@ -1,48 +1,42 @@
 <script>
 	import DiamondChart from './DiamondPlot.svelte';
-	import data from './data.js';
-
-	import data2 from './diamond_dat.js'
+	import data from './diamond_dat.js'
+	import { Select, Label } from 'flowbite-svelte';
 
 	export let name;
 
-	import { Select, Label } from 'flowbite-svelte';
-	
-	let cities = [
-		{ value: "austin", name: "austin" },
-		{ value: "ny", name: "New York" },
-		{ value: "sf", name: "San Francisco" }
-	];
-	
-	let city = 'austin';
+	let years_in_data = Object.keys(data)
 
-	const printCity = () => {
-		console.log(city)
-		console.log(data.map(d => d[city]))
+	let years = []
+	
+	for (let i in years_in_data) {
+		years.push({
+			'value': years_in_data[i],
+			'name': `${years_in_data[i]}-${parseInt(years_in_data[i])+5}`
+		}
+		)
 	}
 
-	// <div class='chart'>
-	// 	<LineChart data={data} city={city}/>
-	// </div>
+
+	let year = '1885';
+
 	
 </script>
-
 
 <main>
 	<h1>Hello {name}!</h1>
 	<p>New allotax is on its way</p>
 	
 	<Label>Select an option
-		<Select class="mt-2" items={cities} bind:value={city} on:change={printCity} />
+		<Select class="mt-2" items={years} bind:value={year} />
 	</Label>
 	
 
 	<div class='chart'>
-		<DiamondChart diamond_dat={data2} />
+		<DiamondChart diamond_dat={data[year]} />
 	</div>
 
 </main>
-
 
 
 <style>

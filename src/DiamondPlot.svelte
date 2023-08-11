@@ -3,15 +3,15 @@
 	import AxisY from './AxisY.svelte';
 	import AxisX from './AxisX.svelte';
 
-	let el;
+	// let el;
 
 	export let diamond_dat;
 
 	var height = 600;
 	var width = 600;
-	var bin_size = 1.5
-	var ncells = 60
-	var margin = ({ top: 100, left: 0, right: 140, bottom: 140 });
+	// var bin_size = 1.5
+	// var ncells = 60
+	// var margin = ({ top: 100, left: 0, right: 140, bottom: 140 });
 
 	const max_xy   = d3.max(diamond_dat, d => d.x1)
 	const max_rank = d3.max(diamond_dat, (d) => d.rank_L[1]);
@@ -21,9 +21,6 @@
     const xyDomain   = [1, 10**Math.ceil(Math.max(Math.log10(max_rank))-1)];
     const xy  = d3.scaleBand().domain(d3.range(60)).range([0, 600])
 	const xyScale = d3.scaleLog().domain(xyDomain).range([0, 512])
-
-	
-
 </script>
 
 <div class='diamond-chart'>
